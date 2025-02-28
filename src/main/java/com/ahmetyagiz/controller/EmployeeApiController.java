@@ -8,11 +8,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
-public class EmployeeController {
+public class EmployeeApiController {
 
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeApiController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 

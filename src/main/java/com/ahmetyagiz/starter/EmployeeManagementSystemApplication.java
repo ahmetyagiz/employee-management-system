@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = {"com.ahmetyagiz"})
 @ComponentScan(basePackages = {"com.ahmetyagiz"})
 @EnableJpaRepositories(basePackages = {"com.ahmetyagiz"})
-public class PersonalManagementSystemApplication {
+public class EmployeeManagementSystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PersonalManagementSystemApplication.class, args);
+		SpringApplication.run(EmployeeManagementSystemApplication.class, args);
 	}
 
 }
