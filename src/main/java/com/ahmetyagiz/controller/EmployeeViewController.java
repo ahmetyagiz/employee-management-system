@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeViewController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeViewController(EmployeeService theEmployeeService) {
         employeeService = theEmployeeService;
