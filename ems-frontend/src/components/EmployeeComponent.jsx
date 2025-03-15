@@ -6,15 +6,15 @@ function EmployeeComponent() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
 
-    function handleFirstName() {
+    function handleFirstName(e) {
         setFirstName(e.target.value);
     }
 
-    function handleLastName() {
+    function handleLastName(e) {
         setLastName(e.target.value);
     }
 
-    function handleEmail() {
+    function handleEmail(e) {
         setEmail(e.target.value);
     }
 
@@ -26,6 +26,7 @@ function EmployeeComponent() {
 
     return (
         <div className='container'>
+            <br /> <br />
             <div className='row'>
                 <div className='card col-md-6 offset-md-3 offset-md-3'>
                     <h2 className='text-center'>Add Employee</h2>
