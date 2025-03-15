@@ -1,15 +1,9 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import EmployeeComponent from './components/EmployeeComponent'
+import React from 'react'
+import ListEmployeeComponent from './components/ListEmployeeComponent'
 
 function App() {
-
   return (
-    <div>
-      <EmployeeComponent />
-    </div>
+    <div><ListEmployeeComponent /></div>
   )
 }
 
