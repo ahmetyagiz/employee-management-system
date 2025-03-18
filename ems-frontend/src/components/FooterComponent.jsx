@@ -1,8 +1,13 @@
 import React from 'react'
 
-function FooterComponent() {
+const FooterComponent = () => {
     return (
-        <div>FooterComponent</div>
+        <div>
+            <footer className='footer'>
+                <span>All rights reserved 2025 by ahmetyagiz</span>
+            </footer>
+
+        </div>
     )
 }
 

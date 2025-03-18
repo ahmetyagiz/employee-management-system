@@ -1,8 +1,15 @@
 import React from 'react'
 
-function HeaderComponent() {
+const HeaderComponent = () => {
     return (
-        <div>HeaderComponent</div>
+        <div>
+            <header>
+                <nav className='navbar navbar-dark bg-dark'>
+                    <a className="navbar-brand" href="https://www.github.com/ahmetyagiz">Employee Management System</a>
+                </nav>
+            </header>
+
+        </div>
     )
 }
 
