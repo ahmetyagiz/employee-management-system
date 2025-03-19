@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -39,5 +39,5 @@ public class Employee {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "hire_date", nullable = false)
-    private Date hireDate;
+    private LocalDate hireDate;
 }
