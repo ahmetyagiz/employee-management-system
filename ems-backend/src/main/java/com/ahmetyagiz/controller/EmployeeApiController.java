@@ -32,6 +32,12 @@ public class EmployeeApiController {
         return employeeService.save(newEmployee);
     }
 
+    @PutMapping("/{id}")
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee) {
+        return employeeService.update(id, updatedEmployee);
+    }
+
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         employeeService.deleteById(id);

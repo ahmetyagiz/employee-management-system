@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { createEmployee, listEmployees } from '../services/EmployeeService'
+import React, { useEffect, useState } from 'react'
+import { createEmployee, getEmployee, updateEmployee } from '../services/EmployeeService'
 import { useNavigate, useParams } from 'react-router-dom';
 
 function EmployeeComponent() {
@@ -13,6 +13,7 @@ function EmployeeComponent() {
     const [salary, setSalary] = useState('');
     const [hireDate, setHireDate] = useState('');
 
+    const { id } = useParams();
     const [errors, setErrors] = useState({
         firstName: '',
         lastName: '',
@@ -26,17 +27,46 @@ function EmployeeComponent() {
 
     const navigator = useNavigate();
 
-    function saveEmployee(e) {
+    useEffect(() => {
+        if (id) {
+            getEmployee(id).then((response) => {
+                setFirstName(response.data.firstName);
+                setLastName(response.data.lastName);
+                setEmail(response.data.email);
+                setPhoneNumber(response.data.phoneNumber);
+                setDepartment(response.data.department);
+                setPosition(response.data.position);
+                setSalary(response.data.salary);
+                setHireDate(response.data.hireDate);
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+    }, [id])
+
+    function saveOrUpdateEmployee(e) {
         e.preventDefault();
 
         if (validateForm()) {
+
             const employee = { firstName, lastName, email, phoneNumber, department, position, salary, hireDate }
             console.log(employee)
 
-            createEmployee(employee).then((response) => {
-                console.log(response.data);
-                navigator('/employees')
-            })
+            if (id) {
+                updateEmployee(id, employee).then((response) => {
+                    console.log(response.data);
+                    navigator('/employees');
+                }).catch(error => {
+                    console.error(error);
+                })
+            } else {
+                createEmployee(employee).then((response) => {
+                    console.log(response.data);
+                    navigator('/employees')
+                }).catch(error => {
+                    console.error(error);
+                })
+            }
         }
     }
 
@@ -87,7 +117,7 @@ function EmployeeComponent() {
             valid = false;
         }
 
-        if (salary.trim()) {
+        if (salary && !isNaN(salary)) {
             errorsCopy.salary = '';
         } else {
             errorsCopy.salary = 'Salary is required';
@@ -106,12 +136,22 @@ function EmployeeComponent() {
         return valid;
     }
 
+    function pageTitle() {
+        if (id) {
+            return <h2 className='text-center'> Update Employee</h2>
+        } else {
+            return <h2 className='text-center'> Add Employee</h2>
+        }
+    }
+
     return (
         <div className='container'>
             <br /> <br />
             <div className='row'>
                 <div className='card col-md-6 offset-md-3 offset-md-3'>
-
+                    {
+                        pageTitle()
+                    }
                     <div className='card-body'>
                         <form>
                             <div className='form-group mb-2'>
@@ -226,7 +266,7 @@ function EmployeeComponent() {
                                 {errors.hireDate && <div className='invalid-feedback'>{errors.hireDate}</div>}
                             </div>
 
-                            <button className='btn btn-success' onClick={saveEmployee}>Submit</button>
+                            <button className='btn btn-success' onClick={saveOrUpdateEmployee}>Submit</button>
                         </form>
                     </div>
                 </div>

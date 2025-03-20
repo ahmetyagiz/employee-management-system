@@ -30,4 +30,17 @@ public class EmployeeService {
     public void deleteById(Long id) {
         employeeRepository.deleteById(id);
     }
+
+    public Employee update(Long id, Employee updatedEmployee) {
+        Employee existingEmployee = employeeRepository.getById(id);
+        existingEmployee.setFirstName(updatedEmployee.getFirstName());
+        existingEmployee.setLastName(updatedEmployee.getLastName());
+        existingEmployee.setEmail(updatedEmployee.getEmail());
+        existingEmployee.setPhoneNumber(updatedEmployee.getPhoneNumber());
+        existingEmployee.setDepartment(updatedEmployee.getDepartment());
+        existingEmployee.setPosition(updatedEmployee.getPosition());
+        existingEmployee.setSalary(updatedEmployee.getSalary());
+        existingEmployee.setHireDate(updatedEmployee.getHireDate());
+        return employeeRepository.save(existingEmployee);
+    }
 }
