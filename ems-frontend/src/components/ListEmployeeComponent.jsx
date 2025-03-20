@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { listEmployees } from '../services/EmployeeService';
+import { deleteEmployee, listEmployees } from '../services/EmployeeService';
 import { useNavigate } from 'react-router-dom';
 
 const ListEmployeeComponent = () => {
@@ -8,12 +8,16 @@ const ListEmployeeComponent = () => {
     const navigator = useNavigate();
 
     useEffect(() => {
+        getAllEmployees();
+    }, [])
+
+    function getAllEmployees() {
         listEmployees().then((response) => {
             setEmployees(response.data);
         }).catch(error => {
             console.log(error);
         });
-    }, [])
+    }
 
     function addNewEmployee() {
         navigator('/add-employee');
@@ -22,6 +26,21 @@ const ListEmployeeComponent = () => {
     function updateEmployee(id) {
         navigator(`/edit-employee/${id}`)
     }
+
+    function removeEmployee(id) {
+        const confirmDelete = window.confirm("Are you sure you want to delete this employee?");
+        console.log(id)
+        if (confirmDelete) {
+            deleteEmployee(id)
+                .then(() => {
+                    getAllEmployees();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }
+
 
     return (
 
@@ -57,9 +76,10 @@ const ListEmployeeComponent = () => {
                                 <td>{employee.salary}</td>
                                 <td>{employee.hireDate}</td>
                                 <td>
-                                    <button className='btn btn-info' onClick={() => {
-                                        updateEmployee(employee.id)
-                                    }}>Update</button>
+                                    <div style={{ display: 'flex', gap: '5px' }}>
+                                        <button className='btn btn-info' onClick={() => updateEmployee(employee.id)}>Update</button>
+                                        <button className='btn btn-danger' onClick={() => removeEmployee(employee.id)}>Delete</button>
+                                    </div>
                                 </td>
                             </tr>)
 
