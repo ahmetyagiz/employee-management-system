@@ -8,21 +8,24 @@ import EmployeeComponent from './components/EmployeeComponent'
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <div id="root">
         <HeaderComponent />
-        <Routes>
-          {/* // http://localhost:8080 */}
-          <Route path='/' element={<ListEmployeeComponent />}></Route>
-          {/* // http://localhost:8080/employees */}
-          <Route path='/employees' element={<ListEmployeeComponent />}></Route>
-          {/* // http://localhost:8080/add-employee */}
-          <Route path='/add-employee' element={<EmployeeComponent />}></Route>
-        </Routes>
+        <div className="content">
+          <Routes>
+            {/* // http://localhost:8080 */}
+            <Route path='/' element={<ListEmployeeComponent />} />
+            {/* // http://localhost:8080/employees */}
+            <Route path='/employees' element={<ListEmployeeComponent />} />
+            {/* // http://localhost:8080/add-employee */}
+            <Route path='/add-employee' element={<EmployeeComponent />} />
+          </Routes>
+        </div>
         <FooterComponent />
-      </BrowserRouter>
-    </>
-  )
+      </div>
+    </BrowserRouter>
+  );
 }
+
 
 export default App
